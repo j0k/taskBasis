@@ -1,0 +1,370 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14136,        362]
+NotebookOptionsPosition[     13321,        338]
+NotebookOutlinePosition[     13664,        353]
+CellTagsIndexPosition[     13621,        350]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[ScriptCapitalW]D", "=", 
+   RowBox[{
+    RowBox[{"DigitCount", "[", 
+     RowBox[{"#", ",", "2", ",", "1"}], "]"}], "&"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"computeW", "[", 
+   RowBox[{"a_", ",", 
+    RowBox[{"outType_:", "0"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"ad", ",", "b", ",", "genAD", ",", "weights"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ad", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"FromDigits", "[", 
+         RowBox[{"#", ",", "2"}], "]"}], "&"}], "/@", "a"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"b", "=", 
+      RowBox[{"Tuples", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", 
+        RowBox[{"a", "//", "Length"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"genAD", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Fold", "[", "BitXor", "]"}], "/@", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Times", "[", 
+             RowBox[{"ad", ",", "#"}], "]"}], "&"}], ")"}], "/@", "b"}], 
+         ")"}]}], "//", "Union"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"weights", "=", " ", 
+      RowBox[{"\[ScriptCapitalW]D", "/@", "genAD"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"outType", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"weights", "//", "Tally"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"weights", ",", "genAD"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.7063336670186677`*^9, 3.7063337097602234`*^9}, 
+   3.706336170512684*^9},ExpressionUUID->"3e51887b-0bea-44df-84c7-\
+3d1808f2a6e0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "testDir", "=", 
+   "\"\<E:\\\\Users\\\\shareddrivers\\\\YandexDisk\\\\proj\\\\core\\\\git\\\\\
+researchClosedTasks\\\\test_data\\\\\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "fileIn", "=", 
+   "\"\<E:\\\\Users\\\\shareddrivers\\\\YandexDisk\\\\proj\\\\core\\\\git\\\\\
+researchClosedTasks\\\\test_data\\\\in_20_32.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fileOut", "=", "\"\<E:\\\\data\\\\out.txt\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataStr", "=", 
+     RowBox[{"ReadList", "[", 
+      RowBox[{"fileIn", ",", "String"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"A", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Interpreter", "[", "\"\<Number\>\"", "]"}], "/@", 
+         RowBox[{"Characters", "@", "#"}]}], "&"}], ")"}], "/@", 
+      "dataStr"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"w", "=", 
+     RowBox[{"computeW", "[", "A", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"w", "=", 
+     RowBox[{
+      RowBox[{"SortBy", "[", 
+       RowBox[{"w", ",", "Last"}], "]"}], "//", "Reverse"}]}], ";"}], 
+   "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.706326856193959*^9, 3.7063268570343113`*^9}, {
+   3.7063269044010277`*^9, 3.70632690721714*^9}, {3.706327374776306*^9, 
+   3.7063273887042933`*^9}, {3.706343032238821*^9, 3.7063430369695845`*^9}, 
+   3.7063467713799553`*^9},ExpressionUUID->"967f2dca-b155-4d24-944f-\
+a9a706a10cfb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"runOnFile", "[", "file_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"w", ",", "dataStr", ",", "A", ",", "hist", ",", "max"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dataStr", "=", 
+      RowBox[{"ReadList", "[", 
+       RowBox[{"file", ",", "String"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"A", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Interpreter", "[", "\"\<Number\>\"", "]"}], "/@", 
+          RowBox[{"Characters", "@", "#"}]}], "&"}], ")"}], "/@", 
+       "dataStr"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"w", "=", 
+      RowBox[{"computeW", "[", "A", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"max", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"w", "[", 
+        RowBox[{"[", 
+         RowBox[{";;", ",", "1"}], "]"}], "]"}], " ", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"hist", "=", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{"0", ",", "max"}], "]"}], "//", "Tally"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"hist", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "+", "1"}], ",", "2"}], "]"}], 
+          "]"}], "=", "0"}], ")"}], "&"}], "/@", "hist"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"hist", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "+", "1"}], ",", "2"}], "]"}], 
+          "]"}], "=", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "&"}], "/@", "w"}], ";", 
+     "\[IndentingNewLine]", "hist"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.706328288569597*^9, 3.706328289704256*^9}, {
+   3.7063283676092296`*^9, 3.7063283903158503`*^9}, {3.706328421350776*^9, 
+   3.706328455872881*^9}, {3.7063286927801867`*^9, 3.7063287268123703`*^9}, {
+   3.706328797282179*^9, 3.706328859480795*^9}, {3.706328899208205*^9, 
+   3.7063289502883096`*^9}, 3.706328980627965*^9, {3.7063299492910957`*^9, 
+   3.706329991482994*^9}, {3.706330141010068*^9, 3.7063301412030993`*^9}, {
+   3.706333510482641*^9, 3.7063335115418696`*^9}, {3.706333606872738*^9, 
+   3.7063336070209455`*^9}, {3.706333862877406*^9, 3.7063339303669796`*^9}, 
+   3.7063340221114883`*^9, {3.706334528926108*^9, 
+   3.7063345290886393`*^9}},ExpressionUUID->"72d4dbef-4325-4138-a43c-\
+c1b977a7ee6e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"writeFile", "[", 
+   RowBox[{"file_", ",", "w_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "stream", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"stream", "=", 
+      RowBox[{"OpenWrite", "[", "file", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"WriteString", "[", 
+        RowBox[{"stream", ",", 
+         RowBox[{
+          RowBox[{"StringTemplate", "[", "\"\<`w`\\t`freq`\\n\>\"", "]"}], 
+          "[", " ", 
+          RowBox[{"<|", 
+           RowBox[{
+            RowBox[{"\"\<w\>\"", "\[Rule]", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+            RowBox[{"\"\<freq\>\"", "\[Rule]", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}]}], "|>"}], " ", "]"}]}], "]"}],
+        "&"}], "/@", "w"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Close", "[", "file", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"writeFileError", "[", 
+   RowBox[{"file_", ",", "msg_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "stream", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"stream", "=", 
+      RowBox[{"OpenWrite", "[", "file", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"WriteString", "[", 
+      RowBox[{"stream", ",", "msg"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Close", "[", "file", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.706330066432876*^9, 3.706330128684189*^9}, {
+  3.7063321038654985`*^9, 
+  3.706332145959853*^9}},ExpressionUUID->"5743d1f7-2fe3-4993-a362-\
+16f8355ddb25"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"runOnDir", "[", 
+   RowBox[{"dir_", ",", 
+    RowBox[{"maxTime_:", "99"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "files", ",", "fileIn", ",", "fileOut", ",", "fname", ",", "i", ",", 
+      RowBox[{"tcompute", "=", "maxTime"}], ",", "w", ",", "fs", ",", 
+      RowBox[{"maxMem", "=", "20"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"files", "=", 
+      RowBox[{"FileNames", "[", 
+       RowBox[{"\"\<*\>\"", ",", 
+        RowBox[{"{", "dir", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"fs", " ", "=", " ", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", " ", 
+        RowBox[{"Length", "@", "files"}]}], ",", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"fileIn", "=", 
+         RowBox[{"files", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"fname", "=", 
+         RowBox[{"FileNameTake", "[", "fileIn", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"fileOut", "=", 
+         RowBox[{
+          RowBox[{"DirectoryName", "[", "fileIn", "]"}], "~~", 
+          RowBox[{"StringReplace", "[", 
+           RowBox[{"fname", ",", 
+            RowBox[{"\"\<in\>\"", "\[Rule]", " ", "\"\<out_up\>\""}]}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"StringMatchQ", "[", 
+           RowBox[{"fname", ",", "\"\<in_*\>\""}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"w", "=", 
+            RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"MemoryConstrained", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"TimeConstrained", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"w", "=", 
+                  RowBox[{"runOnFile", "[", "fileIn", "]"}]}], ";", 
+                 RowBox[{"fs", "=", 
+                  RowBox[{"AppendTo", "[", 
+                   RowBox[{"fs", ",", "fname"}], "]"}]}]}], ",", "tcompute", 
+                ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"writeFileError", "[", 
+                  RowBox[{"fileOut", ",", 
+                   RowBox[{"\"\<Evaluation took > then \>\"", "~~", 
+                    RowBox[{"ToString", "[", "tcompute", "]"}], " ", "~~", 
+                    " ", "\"\< seconds.\>\""}]}], "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";"}], ",", 
+             RowBox[{"1024", "*", "1024", "*", "1024", "*", "maxMem"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"writeFileError", "[", 
+              RowBox[{"fileOut", ",", 
+               RowBox[{"\"\<Evaluation took > then \>\"", "~~", 
+                RowBox[{"ToString", "[", "maxMem", "]"}], "~~", 
+                "\"\< Gb RAM.\>\""}]}], "]"}]}], "\[IndentingNewLine]", "]"}],
+            ";", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "@", "w"}], ">", "0"}], ",", 
+             RowBox[{"writeFile", "[", 
+              RowBox[{"fileOut", ",", "w"}], "]"}]}], "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "fs"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7063301502735205`*^9, 3.706330347987641*^9}, {
+   3.7063320001679773`*^9, 3.7063320965534973`*^9}, {3.706332156203558*^9, 
+   3.706332194132589*^9}, {3.7063325252775946`*^9, 3.706332540889147*^9}, {
+   3.7063325794687853`*^9, 3.706332602225752*^9}, {3.7063326877175426`*^9, 
+   3.7063327744799213`*^9}, {3.706332830425634*^9, 3.706332884463937*^9}, {
+   3.7063329376134305`*^9, 3.70633293930448*^9}, {3.7063331198543224`*^9, 
+   3.706333120866786*^9}, {3.706333204598192*^9, 3.706333204924758*^9}, {
+   3.706333276761461*^9, 3.7063333414250593`*^9}, 3.7063340315343494`*^9, {
+   3.706334187097352*^9, 3.706334195335944*^9}, {3.706335613196538*^9, 
+   3.706335633941414*^9}, {3.70634060737306*^9, 3.7063407079658*^9}, {
+   3.7063427813682747`*^9, 3.7063428220337563`*^9}, {3.706343051565727*^9, 
+   3.706343128295516*^9}, {3.7063467782547235`*^9, 
+   3.706346785256768*^9}},ExpressionUUID->"8b2fad18-03ed-410d-807e-\
+21545c255f06"],
+
+Cell[BoxData[
+ RowBox[{"runOnDir", "[", "testDir", "]"}]], "Input",
+ CellChangeTimes->{{3.706347272407246*^9, 
+  3.7063472897948046`*^9}},ExpressionUUID->"9b06bf5d-3042-499a-b071-\
+2b477df9dadd"]
+},
+WindowSize->{1584, 817},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (March 13, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1876, 52, 221, "Input", "ExpressionUUID" -> \
+"3e51887b-0bea-44df-84c7-3d1808f2a6e0"],
+Cell[2437, 74, 1644, 41, 221, "Input", "ExpressionUUID" -> \
+"967f2dca-b155-4d24-944f-a9a706a10cfb"],
+Cell[4084, 117, 2730, 70, 202, "Input", "ExpressionUUID" -> \
+"72d4dbef-4325-4138-a43c-c1b977a7ee6e"],
+Cell[6817, 189, 1756, 44, 221, "Input", "ExpressionUUID" -> \
+"5743d1f7-2fe3-4993-a362-16f8355ddb25"],
+Cell[8576, 235, 4543, 95, 411, "Input", "ExpressionUUID" -> \
+"8b2fad18-03ed-410d-807e-21545c255f06"],
+Cell[13122, 332, 195, 4, 30, "Input", "ExpressionUUID" -> \
+"9b06bf5d-3042-499a-b071-2b477df9dadd"]
+}
+]
+*)
+
