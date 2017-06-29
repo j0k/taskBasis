@@ -1,0 +1,12 @@
+$ ./difforig.sh
+diff -w ../test_data/out_20_32.txt test/out_orig_20_32.txt
+diff -w ../test_data/out_20_8192.txt test/out_orig_20_8192.txt
+diff -w ../test_data/out_24_32.txt test/out_orig_24_32.txt
+diff -w ../test_data/out_24_8.txt test/out_orig_24_8.txt
+diff -w ../test_data/out_25_8.txt test/out_orig_25_8.txt
+diff -w ../test_data/out_30_8.txt test/out_orig_30_8.txt
+diff -w ../test_data/out_31_32.txt test/out_orig_31_32.txt
+diff -w ../test_data/out_32_256.txt test/out_orig_32_256.txt
+diff -w ../test_data/out_32_32.txt test/out_orig_32_32.txt
+diff -w ../test_data/out_32_64.txt test/out_orig_32_64.txt
+diff -w ../test_data/out_33_64.txt test/out_orig_33_64.txt
